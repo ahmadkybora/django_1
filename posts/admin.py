@@ -1,0 +1,18 @@
+from django.contrib import admin
+from .models import Post, Comment
+
+class CommentAdminInline(admin.TabularInline):
+    model = Comment
+    fields = ["text", ]
+    extra=0
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ["title", "is_enable", "publish_date", "created_at"]
+    inlines = [CommentAdminInline, ]
+    
+# class CommentAdmin(admin.ModelAdmin):
+#     list_display = ["post", "text", "created_at"]
+
+# admin.site.register(Post, PostAdmin)
+# admin.site.register(Comment, CommentAdmin)
